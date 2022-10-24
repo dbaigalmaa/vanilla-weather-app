@@ -57,19 +57,15 @@ function displayFahr(event) {
   let temp = document.querySelector("#temperature");
   let fahr = (cels * 9) / 5 + 32;
   temp.innerHTML = Math.round(fahr);
-  fahrLink.style.pointerEvents = "none";
-  celsLink.style.pointerEvents = "all";
-  fahrLink.style.fontWeight = 700;
-  celsLink.style.fontWeight = 200;
+  fahrLink.classList.add("active");
+  celsLink.classList.remove("active");
 }
 function displayCels(event) {
   event.preventDefault();
   let temp = document.querySelector("#temperature");
   temp.innerHTML = Math.round(cels);
-  fahrLink.style.pointerEvents = "all";
-  celsLink.style.pointerEvents = "none";
-  fahrLink.style.fontWeight = 200;
-  celsLink.style.fontWeight = 700;
+  fahrLink.classList.remove("active");
+  celsLink.classList.add("active");
 }
 
 let cels = null;

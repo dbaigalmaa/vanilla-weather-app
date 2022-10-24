@@ -32,7 +32,6 @@ footer {
 }
 .temperature-wrapper a {
   text-decoration: none;
-  color: #202124;
 }
 #temperature {
   font-size: 40px;
@@ -47,10 +46,9 @@ footer {
   height: 64px;
   width: 64px;
 }
-#cels-link {
+
+.active {
   pointer-events: none;
   font-weight: 700;
-}
-#fahr-link {
-  font-weight: 200;
+  color: #202124;
 }
