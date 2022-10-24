@@ -8,16 +8,17 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let currentDate = new Date(timestamp * 1000);
+  let currentDate = new Date(timestamp);
   let day = days[currentDate.getDay()];
   let hour = currentDate.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
   let minute = currentDate.getMinutes();
   if (minute < 10) {
     minute = `0${minute}`;
   }
-  if (hour < 10) {
-    hour = `0${hour}`;
-  }
+
   return `${day} ${hour}:${minute}`;
 }
 
@@ -36,7 +37,7 @@ function displayTemperature(response) {
   weatherDesc.innerHTML = response.data.condition.description;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   humidityElement.innerHTML = response.data.temperature.humidity;
-  dateElement.innerHTML = formatDate(response.data.time);
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
   iconElement.setAttribute("alt", response.data.condition.description);
   iconElement.setAttribute("src", response.data.condition.icon_url);
 }
