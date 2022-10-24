@@ -74,37 +74,36 @@ function displayTemperature(response) {
   iconElement.setAttribute("src", response.data.condition.icon_url);
 }
 
-function search(city) {
+function search(city, unit) {
   let apiKey = "acab64483d142d2af0b5de09tad9fo2f";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  let apiForecastUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${unit}`;
+  let apiForecastUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${unit}`;
   axios.get(apiUrl).then(displayTemperature);
   axios.get(apiForecastUrl).then(displayForecast);
 }
 function handleSubmit(event) {
   event.preventDefault();
-  let cityInput = document.querySelector("#city-input");
-  search(cityInput.value);
+  cityInput = document.querySelector("#city-input").value;
+  search(cityInput, "metric");
 }
 
 function displayFahr(event) {
   event.preventDefault();
-  let temp = document.querySelector("#temperature");
-  let fahr = (cels * 9) / 5 + 32;
-  temp.innerHTML = Math.round(fahr);
+  // let cityInput = document.querySelector("#city-input");
+  search(cityInput, "imperial");
   fahrLink.classList.add("active");
   celsLink.classList.remove("active");
 }
 function displayCels(event) {
   event.preventDefault();
-  let temp = document.querySelector("#temperature");
-  temp.innerHTML = Math.round(cels);
+  // let cityInput = document.querySelector("#city-input");
+  search(cityInput, "metric");
   fahrLink.classList.remove("active");
   celsLink.classList.add("active");
 }
 
 let cels = null;
-
+let cityInput = "Paris";
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
@@ -113,4 +112,4 @@ fahrLink.addEventListener("click", displayFahr);
 let celsLink = document.querySelector("#cels-link");
 celsLink.addEventListener("click", displayCels);
 
-search("Paris");
+search(cityInput, "metric");
