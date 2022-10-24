@@ -30,6 +30,7 @@ function displayTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let iconElement = document.querySelector("#icon");
 
+  cels = response.data.temperature.current;
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
   cityElement.innerHTML = response.data.city;
   weatherDesc.innerHTML = response.data.condition.description;
@@ -51,7 +52,34 @@ function handleSubmit(event) {
   search(cityInput.value);
 }
 
-search("Paris");
+function displayFahr(event) {
+  event.preventDefault();
+  let temp = document.querySelector("#temperature");
+  let fahr = (cels * 9) / 5 + 32;
+  temp.innerHTML = Math.round(fahr);
+  fahrLink.style.pointerEvents = "none";
+  celsLink.style.pointerEvents = "all";
+  fahrLink.style.fontWeight = 700;
+  celsLink.style.fontWeight = 200;
+}
+function displayCels(event) {
+  event.preventDefault();
+  let temp = document.querySelector("#temperature");
+  temp.innerHTML = Math.round(cels);
+  fahrLink.style.pointerEvents = "all";
+  celsLink.style.pointerEvents = "none";
+  fahrLink.style.fontWeight = 200;
+  celsLink.style.fontWeight = 700;
+}
+
+let cels = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrLink = document.querySelector("#fahr-link");
+fahrLink.addEventListener("click", displayFahr);
+let celsLink = document.querySelector("#cels-link");
+celsLink.addEventListener("click", displayCels);
+
+search("Paris");
