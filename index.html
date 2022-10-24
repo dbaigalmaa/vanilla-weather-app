@@ -11,6 +11,7 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
 
     <title>Weather-app</title>
@@ -18,36 +19,39 @@
   <body>
     <div class="container">
       <div class="weather-app">
-        <h1>Foster City</h1>
+        <h1 id="city"></h1>
         <div class="row">
           <div class="col-6">
             <ul>
-              <li>Wednesday 16:39</li>
-              <li>Partly Cloudy</li>
+              <li id="date"></li>
+              <li id="weather-desc"></li>
             </ul>
           </div>
           <div class="col-6">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-              alt="Partly Cloudy"
-            />
-            29°C | °F
+            <div class="d-flex temperature-wrapper">
+              <img
+                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+                alt="Partly Cloudy"
+              />
+              <span id="temperature"></span>
+              <span id="unit">°C | °F</span>
+            </div>
             <ul>
-              <li>Percipitation: 0%</li>
-              <li>Humidity: 73%</li>
-              <li>Wind: 2km/h</li>
+              <li>Humidity: <span id="humidity"></span>%</li>
+              <li>Wind: <span id="wind"></span> km/h</li>
             </ul>
           </div>
         </div>
-        <small>
+        <hr />
+        <footer>
           <a
             href="https://github.com/dbaigalmaa/vanilla-weather-app"
             target="_blank"
           >
             Open-source code</a
           >
-          by Bella</small
-        >
+          by Bella
+        </footer>
       </div>
     </div>
     <script src="src/app.js"></script>
