@@ -63,7 +63,6 @@ function displayTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let iconElement = document.querySelector("#icon");
 
-  cels = response.data.temperature.current;
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
   cityElement.innerHTML = response.data.city;
   weatherDesc.innerHTML = response.data.condition.description;
@@ -89,20 +88,21 @@ function handleSubmit(event) {
 
 function displayFahr(event) {
   event.preventDefault();
-  // let cityInput = document.querySelector("#city-input");
+  let windUnit = document.querySelector("#wind-unit");
+  windUnit.innerHTML = " mph";
   search(cityInput, "imperial");
   fahrLink.classList.add("active");
   celsLink.classList.remove("active");
 }
 function displayCels(event) {
   event.preventDefault();
-  // let cityInput = document.querySelector("#city-input");
+  let windUnit = document.querySelector("#wind-unit");
+  windUnit.innerHTML = " km/h";
   search(cityInput, "metric");
   fahrLink.classList.remove("active");
   celsLink.classList.add("active");
 }
 
-let cels = null;
 let cityInput = "Paris";
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
