@@ -25,19 +25,18 @@ function formatDate(timestamp) {
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
 
-  let days = [0, 1, 2, 4, 5];
+  let forecastDays = response.data.daily;
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    let tempMax = Math.round(response.data.daily[day].temperature.maximum);
-    let tempMin = Math.round(response.data.daily[day].temperature.minimum);
-    let iconUrl = response.data.daily[day].condition.icon_url;
-    let iconAlt = response.data.daily[day].condition.icon;
-    let dayForecast = formatDate(
-      response.data.daily[day].time * 1000
-    ).substring(0, 3);
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
+  forecastDays.forEach(function (day, index) {
+    if (index < 5) {
+      let tempMax = Math.round(day.temperature.maximum);
+      let tempMin = Math.round(day.temperature.minimum);
+      let iconUrl = day.condition.icon_url;
+      let iconAlt = day.condition.icon;
+      let dayForecast = formatDate(day.time * 1000).substring(0, 3);
+      forecastHTML =
+        forecastHTML +
+        `<div class="col">
               <div class="forecast-date">${dayForecast}</div>
               <img
                 src=${iconUrl}
@@ -49,6 +48,7 @@ function displayForecast(response) {
                 <span class="forecast-temp-min">${tempMin}°</span>
               </div>
             </div>`;
+    }
   });
 
   forecastElement.innerHTML = forecastHTML + `</div>`;
