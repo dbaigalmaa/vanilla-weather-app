@@ -84,6 +84,8 @@ function handleSubmit(event) {
   event.preventDefault();
   cityInput = document.querySelector("#city-input").value;
   search(cityInput, "metric");
+  fahrLink.classList.remove("active");
+  celsLink.classList.add("active");
 }
 
 function displayFahr(event) {
